@@ -18,7 +18,14 @@ service EmployeeService {
   rpc DeleteEmployee (EmployeeID) returns (StatusReply) {}
   // List all employees
   rpc ListAllEmployees (EmptyMessage) returns (EmployeeDataList) {}
-  
+  // Update an employee´s name
+  rpc UpdateEmployeeName (EmployeeNameUpdate) returns (StatusReply) {}
+  // Update an employee´s complete data (name and title)
+  rpc UpdateEmployee (EmployeeData) returns (StatusReply) {}
+  // Get employees by title
+  rpc GetEmployeesByTitle (EmployeeTitle) returns (EmployeeDataList) {}
+  // Count total employees
+  rpc CountEmployees (EmptyMessage) returns (EmployeeCount) {}
 }
 
 message EmployeeData {
@@ -44,4 +51,17 @@ message EmptyMessage{}
 
 message EmployeeDataList{
   repeated EmployeeData employee_data = 1;
+}
+
+message EmployeeNameUpdate {
+  uint32 id = 1;
+  string name = 2;
+}
+
+message EmployeeTitle {
+  string title = 1;
+}
+
+message EmployeeCount {
+  uint32 count = 1;
 }
